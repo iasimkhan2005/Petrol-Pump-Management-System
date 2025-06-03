@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+  <div class="bg-white p-8 rounded shadow-lg w-full max-w-sm">
+    <h2 class="text-2xl font-bold text-center mb-6 text-green-600">Admin Login</h2>
+
+    <form onsubmit="handleLogin(event)" class="space-y-4">
+      <input id="username" type="text" placeholder="Username" class="w-full border p-2 rounded" required />
+      <input id="password" type="password" placeholder="Password" class="w-full border p-2 rounded" required />
+      <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full">Login</button>
+    </form>
+
+    <p id="error" class="text-red-500 text-sm mt-4 hidden text-center"></p>
+  </div>
+
+  <script>
+    async function handleLogin(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const res = await axios.post("http://localhost:5000/admin/login", { username, password });
+        if (res.data.success) {
+          electronAPI.openWindow('admin_panel');
+
+        } else {
+          document.getElementById("error").textContent = "Invalid credentials!";
+          document.getElementById("error").classList.remove("hidden");
+        }
+      } catch (err) {
+        console.error(err);
+        document.getElementById("error").textContent = "Server error. Try again.";
+        document.getElementById("error").classList.remove("hidden");
+      }
+    }
+  </script>
+</body>
+</html>

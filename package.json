@@ -2,21 +2,15 @@
   "name": "petrol_management_system",
   "productName": "petrol_management_system",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Petrol Pump Management System using Electron",
   "main": "src/index.js",
   "scripts": {
-    "start": "electron-forge start",
+    "start": "concurrently \"npm start --prefix backend\" \"electron-forge start\"",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
-  "keywords": [],
-  "author": {
-    "name": "Administrator",
-    "email": "asimali9596a@gmail.com"
-  },
-  "license": "MIT",
   "dependencies": {
     "@tailwindcss/cli": "^4.1.4",
     "axios": "^1.9.0",
@@ -34,7 +28,9 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.8.0",
     "@electron-forge/plugin-fuses": "^7.8.0",
     "@electron/fuses": "^1.8.0",
+    "concurrently": "^9.1.2",
     "electron": "35.2.0",
+    "http-server": "^14.1.1",
     "nodemon": "^3.1.10"
   }
 }
